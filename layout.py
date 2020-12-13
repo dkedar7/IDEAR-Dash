@@ -9,12 +9,12 @@ import pandas as pd
 
 theme_color_code = "#038387" #Teal
 
-## Component 1: Microsoft logo
-microsoftlogo = dbc.Row(
-    dbc.Col(
-       [ html.Img(src='assets/microsoftlogo.png')]
-    )
-)
+## Component 1: Logo adn branding
+# branding = dbc.Row(
+#     dbc.Col(
+#        [ html.Img(src='assets/logo.png')]
+#     )
+# )
 
 ## Component 2. Header title
 header = dbc.Row(
@@ -481,7 +481,6 @@ layout = dbc.Container(
         ),
         dbc.Col(
             [
-                microsoftlogo,
                 header,
                 content
             ], align = 'stretch'
