@@ -70,7 +70,7 @@ class data():
         filtered_cat_columns = []
         temp_dict = {}
         for cat_var in conf_dict['CategoricalColumns']:
-            temp_dict[cat_var] = len(np.unique(df[cat_var]))
+            temp_dict[cat_var] = len(np.unique(df[cat_var].dropna()))
         sorted_x = sorted(temp_dict.items(), key=operator.itemgetter(0), reverse=True)
         conf_dict['CategoricalColumns'] = [x for (x,y) in sorted_x]
         
@@ -82,7 +82,7 @@ class data():
             return len(x.index)-x.count()
 
         def num_unique(x):
-            return len(np.unique(x))
+            return len(np.unique(x.dropna()))
 
         temp_df = self.df0.describe().T
         missing_df = pd.DataFrame(self.df0.apply(num_missing, axis=0))

@@ -32,17 +32,6 @@ header = dbc.Row(
     style = {'text-align':'center', "padding":"2% 2% 1% 1%", "background-color":theme_color_code}
 )
 
-## Component 3. Sidebar specifications
-SIDEBAR_STYLE = {
-    "position": "fixed",
-    "top": 0,
-    "left": 0,
-    "bottom": 0,
-    "width": "16rem",
-    "padding": "2rem 1rem",
-    "background-color": "#f8f9fa",
-}
-
 # the styles for the main content position it to the right of the sidebar and
 # add some padding.
 CONTENT_STYLE = {
@@ -51,26 +40,18 @@ CONTENT_STYLE = {
     "padding": "2rem 1rem",
 }
 
-sidebar = html.Div(
-    [
-        html.H2("Automated Exploratory Data Analysis Tool", className="display-5"),
-        html.Hr(),
-        html.P(
-            "A simple sidebar layout with navigation links", className="lead"
-        ),
-        dbc.Nav(
-            [
-                dbc.NavLink("Profile Data", href="/profile-data", id="profile-data-link"),
-                dbc.NavLink("Descriptive Statistics", href="/descriptive-statistics", id="descriptive-statistics-link"),
-                dbc.NavLink("Univariate Analysis", href="/univariate", id="univariate-link"),
-                dbc.NavLink("Multivariate Analysis", href="/multivariate", id="multivariate-link"),
-                dbc.NavLink("Visualize Numerical Variables", href="/numerical-visualize", id="numerical-viz-link"),
-            ],
-            vertical=True,
-            pills=True,
-        ),
-    ],
-    style=SIDEBAR_STYLE,
+# Tob tabs to navigate between different tab content
+top_tabs = dbc.Row([
+    dbc.Col([
+        dcc.Tabs([
+            dcc.Tab(label = "Profile Data", value = "profile-data"),
+            dcc.Tab(label = "Descriptive Statistics", value = "descriptive-statistics"),
+            dcc.Tab(label = "Univariate Analysis", value = "univariate"),
+            dcc.Tab(label = "Multivariate Analysis", value = "multivariate"),
+            dcc.Tab(label = "Visualize Numerical Variables", value = "numerical-visualize")
+            ], value = "profile-data", id = "tabs")
+        ])
+    ], style = {'text-align':'center', "padding":"2% 2% 1% 1%"}
 )
 
 content = html.Div(id="page-content")
@@ -476,12 +457,8 @@ layout = dbc.Container(
         dcc.Store(id='memory-output', storage_type='memory'),
         dbc.Col(
             [
-                html.Div([dcc.Location(id="url"), sidebar])
-            ]
-        ),
-        dbc.Col(
-            [
                 header,
+                top_tabs,
                 content
             ], align = 'stretch'
         )
