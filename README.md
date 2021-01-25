@@ -1,5 +1,5 @@
 # IDEAR-Dash (under construvtion)
-Interactive Data Exploratory Analysis and Reporting (IDEAR) is a project by Microsoft, [maintained here] (https://github.com/Azure/Azure-TDSP-Utilities/tree/master/DataScienceUtilities/DataReport-Utils/Python), that allows us to interactively explore, visualize, analyze data sets. This project is a [Dash] (https://plotly.com/dash/) implementation of the IDEAR tool.
+Interactive Data Exploratory Analysis and Reporting (IDEAR) is a project by Microsoft, [maintained here](https://github.com/Azure/Azure-TDSP-Utilities/tree/master/DataScienceUtilities/DataReport-Utils/Python), that allows us to interactively explore, visualize, analyze data sets. This project is a [Dash](https://plotly.com/dash/) implementation of the IDEAR tool.
 
 # ToDo
 - [x] Add tabs instead of sidebar
