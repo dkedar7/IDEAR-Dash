@@ -1,4 +1,12 @@
-# IDEAR-Dash
+# IDEAR-Dash (under construvtion)
+
+
+# ToDo
+- [x] Add tabs instead of sidebar
+- [ ] Perfect the analysis of titatic data
+- [ ] Make UI better
+- [ ] Additional tab with configurable parameters (data input, config.yaml)
+- [ ] Deploy to GCP Cloud Run
 
 
 ## Installation
