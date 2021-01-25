@@ -41,17 +41,19 @@ data_object = data()
 df = data_object.df
 conf_dict = data_object.conf_dict
 
-@app.callback(Output("page-content", "children"), [Input("url", "pathname")])
-def render_page_content(pathname):
-    if pathname in ["/", "/profile-data"]:
+@app.callback(Output("page-content", "children"), 
+# [Input("url", "pathname")]
+[Input("tabs", "value")])
+def render_page_content(tab):
+    if tab == "profile-data":
         return profile_data_layout
-    elif pathname == "/descriptive-statistics":
+    elif tab == "descriptive-statistics":
         return descriptive_statistics_layout
-    elif pathname == "/univariate":
+    elif tab == "univariate":
         return univariate_layout
-    elif pathname == "/multivariate":
+    elif tab == "multivariate":
         return interactions_layout
-    elif pathname == "/numerical-visualize":
+    elif tab == "numerical-visualize":
         return num_viz_layout
     
     # If the user tries to reach a different page, return a 404 message
@@ -59,7 +61,7 @@ def render_page_content(pathname):
         [
             html.H1("404: Not found", className="text-danger"),
             html.Hr(),
-            html.P(f"The pathname {pathname} was not recognized..."),
+            html.P(f"The pathname {tab} was not recognized..."),
         ]
     )
 
