@@ -52,4 +52,4 @@ Data analyzer uses the [MIT license](https://github.com/dkedar7/IDEAR-Dash/blob/
 
 ## Dependencies
 
-You need [Python 3](https://python3statement.org/) to run this application. Other dependencies can be found in the [requirements.txt](https://github.com/dkedar7/IDEAR-Dash/blob/master/Analyzer/requirements.txt) file.
+You need [Python 3](https://python3statement.org/) to run this application. Other dependencies can be found in the [requirements.txt](https://github.com/dkedar7/IDEAR-Dash/blob/master/requirements.txt) file.
