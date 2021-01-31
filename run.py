@@ -41,9 +41,7 @@ data_object = data()
 df = data_object.df
 conf_dict = data_object.conf_dict
 
-@app.callback(Output("page-content", "children"), 
-# [Input("url", "pathname")]
-[Input("tabs", "value")])
+@app.callback(Output("page-content", "children"), [Input("tabs", "value")])
 def render_page_content(tab):
     if tab == "profile-data":
         return profile_data_layout
@@ -518,4 +516,5 @@ def generate_3d_pca(cat_var_3d, cat_var_2d, pc_x, pc_y):
 
 
 if __name__ == '__main__':
-    app.server.run(debug=True, host='0.0.0.0', port=int(os.environ.get('PORT', 8080)))
+    # app.server.run(debug=True, host='0.0.0.0', port=int(os.environ.get('PORT', 8080)))
+    app.server.run(debug = True)
