@@ -186,7 +186,7 @@ categorical_dropdown = dbc.Row(
             dbc.Col(
             [
                 dbc.Label("Select top n values", html_for="categorical-top-n"),
-                dbc.Select(id="categorical-top-n")
+                dbc.Select(id="categorical-top-n", value = 10)
             ]
         )
         ]
