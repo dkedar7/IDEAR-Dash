@@ -41,9 +41,7 @@ data_object = data()
 df = data_object.df
 conf_dict = data_object.conf_dict
 
-@app.callback(Output("page-content", "children"), 
-# [Input("url", "pathname")]
-[Input("tabs", "value")])
+@app.callback(Output("page-content", "children"), [Input("tabs", "value")])
 def render_page_content(tab):
     if tab == "profile-data":
         return profile_data_layout
@@ -185,12 +183,14 @@ def generate_numerical_distribution(value):
     status, color, p_val = data.shapiro_test(df[value])
     normality_text = f"Normality test for {value} {status} (p_value = {p_val})"
 
-    histogram = px.histogram(df, x=value, marginal="box", template=template, title=f"Histogram of {value}")
+    histogram = px.histogram(df, x=value, template=template, title=f"Histogram of {value}")
+    histogram.update_layout({"yaxis": {"title": "Frequency"}})
 
     hist_data = [df[value]]
-    group_labels = ['distplot'] # name of the dataset
-    kdeplot = ff.create_distplot(hist_data, group_labels)
-    kdeplot.update_layout(template=template, title=f"KDE plot of {value}")
+    group_labels = [value] # name of the dataset
+    kdeplot = ff.create_distplot(hist_data, group_labels, show_hist=False, show_rug=False)
+    kdeplot.update_layout({"xaxis": {"title": f"{value}"}, "yaxis": {"title": "Density"}}, 
+                        template=template, title=f"KDE plot of {value}")
 
     qq=stats.probplot(df[value])
     x = np.array([qq[0][0][0], qq[0][0][-1]])
@@ -199,7 +199,9 @@ def generate_numerical_distribution(value):
     qqplot.add_scatter(x=qq[0][0], y=qq[0][1], mode='markers')
     qqplot.add_scatter(x=x, y=qq[1][1] + qq[1][0]*x, mode='lines')
     qqplot.layout.update(showlegend=False)
-    qqplot.update_layout(template=template, title=f"QQ plot to check normality of {value}")
+    qqplot.update_layout({'xaxis': {'title': 'Theoretical Quantities'}, 
+                        'yaxis': {'title': 'Ordered Values'}}, template=template, 
+                        title=f"QQ plot to check normality of {value}")
 
     boxplot = px.box(df, y=value, template=template, title=f"Boxplot for distribution of {value}")
 
@@ -241,13 +243,15 @@ def generate_categorical_distribution(value1, value2):
 
     template = "plotly_white"
 
-    if value2:
-        eng_df = data_object.target_distribution(value1).iloc[:int(value2),:]
-    else:
-        eng_df = data_object.target_distribution(value1)
+    # if value2:
+    eng_df = data_object.target_distribution(value1).iloc[:int(value2),:]
+    # else:
+    #     eng_df = data_object.target_distribution(value1)
 
     barplot = px.bar(eng_df, x='index', y=value1, labels= {'index': value1, value1:'Frequency'}, 
                     template=template, title = f"Bar plot for distribution of {value1}")
+    barplot.update_layout({"xaxis": {"type": 'category'}})
+
     pieplot = px.pie(eng_df, values=value1, names='index',template=template,
                      title = f"Pie chart for distribution of {value1}")
 
@@ -518,4 +522,5 @@ def generate_3d_pca(cat_var_3d, cat_var_2d, pc_x, pc_y):
 
 
 if __name__ == '__main__':
-    app.server.run(debug=True, host='0.0.0.0', port=int(os.environ.get('PORT', 8080)))
+    # app.server.run(debug=True, host='0.0.0.0', port=int(os.environ.get('PORT', 8080)))
+    app.server.run(debug = True)
